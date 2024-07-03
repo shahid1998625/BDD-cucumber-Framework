@@ -39,6 +39,27 @@ public class GmailPage {
     public WebElement getNextBtnPw(){
         return nextBtnPw;
     }
+    @FindBy(xpath = "//div[contains(text(), 'Compose')]")
+    WebElement composeBtn;
+    public WebElement getComposeBtn(){
+        return composeBtn;
+    }
+    @FindBy(xpath = "//input[@name='subjectbox']")
+    WebElement subjectgmail;
+    public WebElement getSubjectgmail(){
+        return subjectgmail;
+    }
+    @FindBy(xpath = "//input[@aria-label='To recipients']")
+    WebElement toBtnincompose;
+    public WebElement getToBtnincompose(){
+        return toBtnincompose;
+    }
+    @FindBy(xpath = "//div[@role='textbox']")
+    WebElement messageBody;
+    public WebElement getMessageBody(){
+        return messageBody;
+    }
+
 
     public void enterusernameandpasswordgmail(String pw){
 
