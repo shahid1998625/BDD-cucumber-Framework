@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="4.336" tests="1" skipped="0" failures="0" errors="0">
+<testcase classname="RahulShetty Login Functionality Practice" name="Login page functionality practice - #1.1" time="4.15">
+<system-out><![CDATA[
+Given user launches the login page..........................................passed
+When User enters the username and password "rahulshettyacademy" "learning"..passed
+]]></system-out>
+</testcase>
+</testsuite>
