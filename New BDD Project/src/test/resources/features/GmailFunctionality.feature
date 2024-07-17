@@ -13,4 +13,5 @@ Feature: Gmail Login and Send an email
     Given User Launches the Google Account URL
     When user enters the username and password
     Then user clicks on google apps button and navigate to
+    Then Verify Gmail Homepage is displayed and compose and email
     Then Close the browser
