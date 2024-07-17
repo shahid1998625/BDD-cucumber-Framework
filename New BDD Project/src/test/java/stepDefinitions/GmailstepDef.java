@@ -24,17 +24,18 @@ public class GmailstepDef extends BaseClass{
     private int specific_Row = 2;
     private WebDriverWait wait ;
 
-    public GmailstepDef() {
+    public GmailstepDef() throws IOException  {
         driver = BaseClass.getDriver();
         gp = new GmailPage(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        Exsheet= new ExcelUtil("src/test/resources/Test Data/InputTestData.xlsx", "Sheet1");
+
     }
 
     @Given("User Launches the URL")
-    public void User_Launches_the_URL() throws IOException {
+    public void User_Launches_the_URL(){
     ExtentReportUtil.getTest().info("Given user launches Gmail link");
     setUp();
-    Exsheet= new ExcelUtil("src/test/resources/Test Data/InputTestData.xlsx", "Sheet1");
     int Url = 0;
     String URL = Exsheet.getCellData(specific_Row,Url);
     driver.get(URL);
@@ -149,13 +150,13 @@ public class GmailstepDef extends BaseClass{
 
     }
     @Then("user clicks on google apps button and navigate to")
-    public void user_clicks_on_google_apps_button_and_navigate_to(){
+    public void user_clicks_on_google_apps_button_and_navigate_to() throws InterruptedException {
         ExtentReportUtil.getTest().info("Then user clicks on google apps button and navigate to");
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(gp.getGoogleAppsBtn()));
         gp.getGoogleAppsBtn().click();
-//        wait.until(ExpectedConditions.elementToBeClickable(gp.getGmailBtn()));
-        wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='https://mail.google.com/mail/?authuser=0']"))));
+        driver.switchTo().frame("app");
+        wait.until(ExpectedConditions.elementToBeClickable(gp.getGmailBtn()));
         gp.getGmailBtn().click();
         ScreenshotListener.screenshotlist.add(cp.TestScreenshot(driver));
         String originalWindow = driver.getWindowHandle();
@@ -175,7 +176,7 @@ public class GmailstepDef extends BaseClass{
             ScreenshotListener.screenshotlist.add(cp.TestScreenshot(driver));
         }
         wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(gp.getComposeBtn())));
-        gp.getComposeBtn().click();
+//        gp.getComposeBtn().click();
 
     }
     @Then("Close the browser")

@@ -1,13 +1,7 @@
 Feature: RahulShetty Login Functionality Practice
 
-  @R1
-  Scenario Outline: Login page functionality practice
-    Given user launches the login page
-    When User enters the username and password "<UserName>" "<Password>"
-
-
-
-
-    Examples:
-      |       UserName       | Password |
-      |   rahulshettyacademy | learning |
+  @run1
+  Scenario: Login page functionality practice
+    Given user launches the rahulshetty automation login page
+    When User enters the username and password
+    Then Validate login page details

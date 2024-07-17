@@ -1,7 +1,7 @@
 Feature: Outlook Login and Send an email
 
 
-  @@run1
+  @run1
   Scenario: outlook Login
     Given user launches microsoft link
     When user enters username and password

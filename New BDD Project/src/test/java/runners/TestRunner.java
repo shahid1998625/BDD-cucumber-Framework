@@ -9,7 +9,7 @@ import org.testng.annotations.AfterClass;
 
 @CucumberOptions(
 
-        tags =  "@R1",
+        tags =  "@run1",
         features = {"src/test/resources/features"},
         dryRun = false,
         glue = {"stepDefinitions", "utils"},
