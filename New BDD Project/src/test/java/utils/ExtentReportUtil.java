@@ -7,6 +7,7 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 
 import static runners.BaseClass.driver;
 
@@ -18,7 +19,7 @@ public class ExtentReportUtil {
     public static void setup() {
         System.out.println("Setting up ExtentReports...");
         if (extent == null) {
-            sparkReporter = new ExtentSparkReporter("reports/extent-report" +System.currentTimeMillis() + ".html");
+            sparkReporter = new ExtentSparkReporter("reports/extent-report" + System.currentTimeMillis() + ".html");
             sparkReporter.config().setTheme(Theme.STANDARD);
             extent = new ExtentReports();
             extent.attachReporter(sparkReporter);
@@ -40,6 +41,7 @@ public class ExtentReportUtil {
         }
         return test;
     }
+
     public static void logPass(String message) {
         test.pass(message);
     }
@@ -48,17 +50,36 @@ public class ExtentReportUtil {
         test.fail(message);
     }
 
-    public static void attachScreenshot(String path) {
-        test.addScreenCaptureFromPath(path);
+    public static void logInfo(String message) {
+        test.info(message);
+    }
+
+    public static String captureScreenshotAsBase64(WebDriver driver) {
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        return ts.getScreenshotAs(OutputType.BASE64);
+    }
+
+    public static void logPassWithScreenshot(WebDriver driver, String message) {
+        String base64Screenshot = captureScreenshotAsBase64(driver);
+        test.pass(message, com.aventstack.extentreports.MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
+    }
+
+    public static void logFailWithScreenshot(WebDriver driver, String message) {
+        String base64Screenshot = captureScreenshotAsBase64(driver);
+        test.fail(message, com.aventstack.extentreports.MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
+    }
+
+    public static void attachScreenshot(String base64Screenshot) {
+        test.addScreenCaptureFromBase64String(base64Screenshot);
     }
 
     public static void tearDown(Scenario scenario) {
-
         if (scenario.isFailed()) {
             TakesScreenshot screenshot = (TakesScreenshot) driver;
             byte[] data = screenshot.getScreenshotAs(OutputType.BYTES);
             scenario.attach(data, "image/jpeg", "Failed Step Screenshot");
-            test.fail("Test Failed").addScreenCaptureFromPath("screenshot.jpeg");
+            String base64Screenshot = captureScreenshotAsBase64(driver);
+            test.fail("Test Failed").addScreenCaptureFromBase64String(base64Screenshot);
         } else {
             test.pass("Test Passed");
         }
@@ -70,5 +91,4 @@ public class ExtentReportUtil {
             extent.flush();
         }
     }
-
-    }
+}

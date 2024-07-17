@@ -22,5 +22,18 @@ public class CaptureScreenshot {
         }
         return null;
     }
+
+    public static String captureScreenshotAsBase64(WebDriver driver) {
+        try {
+            TakesScreenshot screenshot = (TakesScreenshot) driver;
+            String base64Screenshot = screenshot.getScreenshotAs(OutputType.BASE64);
+            System.out.println("Screenshot taken successfully.");
+            return base64Screenshot;
+        } catch (Exception e) {
+            System.out.println("An error occurred while taking screenshot: " + e.getMessage());
+            return null;
+        }
+    }
+
 }
 

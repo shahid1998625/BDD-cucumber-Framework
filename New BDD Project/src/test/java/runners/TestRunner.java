@@ -10,8 +10,8 @@ import org.testng.annotations.AfterClass;
 
 @CucumberOptions(
 
-        tags = "@T1u",
-        features = "src/test/resources/features",
+
+        features = {"src/test/resources/features"},
         glue = {"stepDefinitions", "utils"},
         plugin = {
                 "pretty",
@@ -21,7 +21,8 @@ import org.testng.annotations.AfterClass;
                 "junit:target/cucumber-reports/cucumber.xml"
         },
 
-        monochrome = true
+        monochrome = true,
+        tags = "@run"
 )
 @Listeners(ScreenshotListener.class)
 

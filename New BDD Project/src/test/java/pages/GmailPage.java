@@ -59,7 +59,38 @@ public class GmailPage {
     public WebElement getMessageBody(){
         return messageBody;
     }
+    @FindBy(xpath = "//div[@command='signature']")
+    WebElement signatureBtn;
+    public WebElement getSignatureBtn(){
+        return signatureBtn;
+    }
 
+    @FindBy(xpath = "//div[contains(text(), 'My Signature')]")
+    WebElement Mysignature;
+    public WebElement getMysignature(){
+        return Mysignature;
+    }
+
+    @FindBy(xpath = "//div[@class='gmail_signature']")
+    WebElement AfterMySignatureText;
+    public WebElement getAfterMySignatureText(){
+        return AfterMySignatureText;
+    }
+    @FindBy(xpath = "//ul[@class='h-c-header__cta-list']/li[2]")
+    WebElement gotoGoogleAcc;
+    public WebElement getGotoGoogleAcc(){
+        return gotoGoogleAcc;
+    }
+    @FindBy(xpath = "//a[@aria-label='Google apps']")
+    WebElement googleAppsBtn;
+    public WebElement getGoogleAppsBtn(){
+        return googleAppsBtn;
+    }
+    @FindBy(xpath = "//span[contains(text(),'Gmail')]")
+    WebElement gmailBtn;
+    public WebElement getGmailBtn(){
+        return gmailBtn;
+    }
 
     public void enterusernameandpasswordgmail(String pw){
 
