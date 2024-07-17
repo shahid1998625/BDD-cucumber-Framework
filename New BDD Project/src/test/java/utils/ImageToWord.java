@@ -20,9 +20,7 @@ public class ImageToWord {
         ArrayList<String> base64Images = new ArrayList<>();
         base64Images.add("..."); // Add your base64 strings here
 
-//        String outputPath = "output.docx"; // Specify the output path
         String outputPath = "ReportsOTR/output.docx";
-//        "reports/extent-report.html");
 
         try {
             appendImagesToWord(base64Images, outputPath);

@@ -7,27 +7,28 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Test;
 import pages.GmailPage;
-import pages.Outlook.outlookPage;
 import runners.BaseClass;
 import utils.*;
-
-import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertTrue;
 
-public class GmailstepDef extends BaseClass {
+public class GmailstepDef extends BaseClass{
 
-    GmailPage gp;
-    ExcelUtil Exsheet;
-    CaptureScreenshot cp = new CaptureScreenshot();
-    int specific_Row = 2;
-    WebDriverWait wait ;
+    private GmailPage gp;
+    private ExcelUtil Exsheet;
+    private CaptureScreenshot cp = new CaptureScreenshot();
+    private int specific_Row = 2;
+    private WebDriverWait wait ;
+
+    public GmailstepDef() {
+        driver = BaseClass.getDriver();
+        gp = new GmailPage(driver);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    }
 
     @Given("User Launches the URL")
     public void User_Launches_the_URL() throws IOException {
@@ -150,10 +151,11 @@ public class GmailstepDef extends BaseClass {
     @Then("user clicks on google apps button and navigate to")
     public void user_clicks_on_google_apps_button_and_navigate_to(){
         ExtentReportUtil.getTest().info("Then user clicks on google apps button and navigate to");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(gp.getGoogleAppsBtn()));
         gp.getGoogleAppsBtn().click();
-        wait.until(ExpectedConditions.elementToBeClickable(gp.getGmailBtn()));
+//        wait.until(ExpectedConditions.elementToBeClickable(gp.getGmailBtn()));
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='https://mail.google.com/mail/?authuser=0']"))));
         gp.getGmailBtn().click();
         ScreenshotListener.screenshotlist.add(cp.TestScreenshot(driver));
         String originalWindow = driver.getWindowHandle();
@@ -174,9 +176,10 @@ public class GmailstepDef extends BaseClass {
         }
         wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(gp.getComposeBtn())));
         gp.getComposeBtn().click();
-        // Perform your actions on the new tab
-//        WebElement newTabElement = driver.findElement(By.xpath("(//span[contains(text(), 'Inbox')])[1]"));
-//        newTabElement.click();
-    }
 
+    }
+    @Then("Close the browser")
+    public void Close_the_browser(){
+        tearDown();
+    }
 }

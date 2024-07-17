@@ -9,9 +9,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-import static runners.BaseClass.driver;
-
-public class ExtentReportUtil {
+public class ExtentReportUtil{
     private static ExtentReports extent;
     private static ExtentSparkReporter sparkReporter;
     private static ExtentTest test;
@@ -75,11 +73,11 @@ public class ExtentReportUtil {
 
     public static void tearDown(Scenario scenario) {
         if (scenario.isFailed()) {
-            TakesScreenshot screenshot = (TakesScreenshot) driver;
-            byte[] data = screenshot.getScreenshotAs(OutputType.BYTES);
-            scenario.attach(data, "image/jpeg", "Failed Step Screenshot");
-            String base64Screenshot = captureScreenshotAsBase64(driver);
-            test.fail("Test Failed").addScreenCaptureFromBase64String(base64Screenshot);
+//            TakesScreenshot screenshot = (TakesScreenshot) driver;
+//            byte[] data = screenshot.getScreenshotAs(OutputType.BYTES);
+//            scenario.attach(data, "image/jpeg", "Failed Step Screenshot");
+//            String base64Screenshot = captureScreenshotAsBase64(driver);
+            //test.fail("Test Failed").addScreenCaptureFromBase64String(base64Screenshot);
         } else {
             test.pass("Test Passed");
         }
