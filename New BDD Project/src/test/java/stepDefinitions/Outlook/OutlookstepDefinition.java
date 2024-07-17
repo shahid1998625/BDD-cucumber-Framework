@@ -4,17 +4,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.checkerframework.checker.units.qual.K;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pages.Outlook.outlookPage;
 import runners.BaseClass;
 import utils.*;
-
-import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Set;
@@ -34,8 +30,14 @@ public class OutlookstepDefinition extends BaseClass {
             Exsheet= new ExcelUtil("src/test/resources/Test Data/OutlookInputData.xlsx", "Sheet1");
             int Url = 0;
             String URL =Exsheet.getCellData(specific_Row,Url);
-            driver.get(URL);
-            ExtentReportUtil.logPass("Opened the Application URL");
+            try {
+                driver.get(URL);
+                ExtentReportUtil.logPass("Opened the Application URL");
+            }
+            catch (UnhandledAlertException e){
+                Alert alert = driver.switchTo().alert();
+                alert.dismiss();
+            }
             op = new outlookPage(driver);
 
         }
@@ -125,12 +127,8 @@ public class OutlookstepDefinition extends BaseClass {
         }
         else {
             ExtentReportUtil.logPass("Right page");
-//            cp.CapturedScreenshot(driver);
             TakesScreenshot screenshot = (TakesScreenshot) driver;
             byte[] data = screenshot.getScreenshotAs(OutputType.BYTES);
-//            File data1 = screenshot.getScreenshotAs(OutputType.FILE);
-            // Save the screenshot to a file
-            // Assuming you save it to "screenshot.png"
             ExtentReportUtil.attachScreenshot("reports/screenshot.png");
             System.out.println("Screenshot jpeg op");
             op.getNewemailBtn().click();

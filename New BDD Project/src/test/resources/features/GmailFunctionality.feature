@@ -1,27 +1,16 @@
 Feature: Gmail Login and Send an email
 
-@GmailTestCase1 @run
-  Scenario Outline: Gmail Login with username and Password
+@GmailTestCase1 @run1
+  Scenario: Gmail Login with username and Password
     Given User Launches the URL
     When user enters the username and password
     Then Verify Gmail Homepage is displayed and compose and email
+    Then Close the browser
 
 
-    Examples:
-    | URL               | username                  | password |
-    |https://gmail.com/ |  testingemail625@gmail.com | Password62598@ |
-
-
-  @GmailTestCase2
+  @GmailTestCase2 @run1
   Scenario: Gmail login2
     Given User Launches the Google Account URL
     When user enters the username and password
     Then user clicks on google apps button and navigate to
-
-
-
-#  @GmailTestCase1 @run
-#  Scenario : Gmail Login with username and Password
-#    Given User Launches the URL
-#    When user enters the username and password
-#    Then Verify Gmail Homepage is displayed and compose and email
+    Then Close the browser

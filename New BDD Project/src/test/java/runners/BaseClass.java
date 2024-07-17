@@ -1,20 +1,25 @@
 package runners;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.*;
+import utils.DriverManager;
 
 public class BaseClass {
-    public static WebDriver driver;
 
+    protected static WebDriver driver;
+
+    @BeforeClass
     public static void setUp() {
-        driver = new ChromeDriver();
-//        driver = new EdgeDriver();
+        driver = DriverManager.getDriver();
         driver.manage().window().maximize();
     }
 
+    @AfterClass
     public static void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+        DriverManager.quitDriver();
+    }
+
+    public static WebDriver getDriver() {
+        return driver;
     }
 }
