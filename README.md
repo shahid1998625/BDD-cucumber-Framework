@@ -13,7 +13,7 @@ BDD cucumber Framework
 
 ## Introduction
 This repository contains a Behavior Driven Development (BDD) test automation framework using Cucumber, TestNG, Java, and Selenium WebDriver.
-The framework supports the Page Object Model (POM) pattern and integrates Extent Reports for test reporting.
+The framework supports the Page Object Model (POM) pattern and integrates with Extent Reports for test reporting.
 
 ## Features
 1. **Driver Management**
@@ -21,30 +21,38 @@ The framework supports the Page Object Model (POM) pattern and integrates Extent
 
 2. **Page Object Model**
    - Implemented the Page Object Model pattern using @FindBy with the Page Factory model for better maintainability and readability of web page classes.
+   - Path: src/main/java/com/QM/pages/
 
 3. **Cucumber**
    - Cucumber used for BDD Styling in which feature files are written in Gherkin Format/language for easily understandable for anyone who uses this framework.
    - Developed Feature files for different features to outline the behavior of the application under test.
+     Path: src/test/resources/features/
 
 4. **Step Definitions**
    - Created Step Definition files to define the steps of each scenario in the feature files.
-
+   - Path: src/test/java/com/QM/steps/
+   
 5. **TestNG**
-   - Integrated TestNG as the Test Runner for test execution.
+   - Integrated TestNG as the Test Runner for test execution. 
+   - *Path: src/test/java/com/QM/runners/
 
 6. **Extent Reports**
    - Generated Cucumber Report and detailed Extent Reports.
    - Utilized an Extent Report Utility File to log the pass/fail status of test steps.
    - Captured and included screenshots for each test step in the HTML Extent Report, enhancing the clarity and detail of the test results.
+   - Path: reports/extent-reports
 
 7. **Screenshot Handling**
    - Used Screenshot Listeners to capture and embed screenshots Base64 images to Word format, storing them in a `word.doc` for easy access and review.
+   - Path: ReportsOTR/
 
 8. **Test Data Input**
-    - Implemented an Excel Utility File to manage and input test data efficiently using File Input Stream for Data-driven testing with Excel utility
-
+    - Implemented an Excel Utility File to manage and input test data efficiently using File Input Stream for Data-driven testing with Excel utility 
+    - Path: src/test/resources/Test Data/InputTestData.xlsx
+   
 9. **Test Data Security**
     - Implemented encryption and decryption of test data using Jar files to ensure the data security.
+
 
 ## Prerequisites
 - Java JDK 11 or higher 
@@ -55,7 +63,8 @@ The framework supports the Page Object Model (POM) pattern and integrates Extent
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/your-repository.git
+   git clone https://github.com/shahid1998625/BDD-cucumber-Framework
+   cd BDD-cucumber-Framework
    mvn clean install
 
 ## Project Structure

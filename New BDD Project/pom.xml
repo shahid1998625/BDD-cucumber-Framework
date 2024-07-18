@@ -88,7 +88,7 @@
             <artifactId>datadecryptor</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/test/java/jars/DataDecryptor.jar</systemPath>
+            <systemPath>${project.basedir}/src/main/java/com/QM/jars/DataDecryptor.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>

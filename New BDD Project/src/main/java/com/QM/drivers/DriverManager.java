@@ -10,7 +10,7 @@ public class DriverManager {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            String browser = System.getProperty("browser", "chrome"); // or get from a config file
+            String browser = System.getProperty("browser", "chrome");
             switch (browser.toLowerCase()) {
                 case "chrome":
                     driver = new ChromeDriver();
