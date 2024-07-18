@@ -26,7 +26,7 @@ The framework supports the Page Object Model (POM) pattern and integrates with E
 3. **Cucumber**
    - Cucumber used for BDD Styling in which feature files are written in Gherkin Format/language for easily understandable for anyone who uses this framework.
    - Developed Feature files for different features to outline the behavior of the application under test.
-     Path: src/test/resources/features/
+   - Path: src/test/resources/features/
 
 4. **Step Definitions**
    - Created Step Definition files to define the steps of each scenario in the feature files.
@@ -34,7 +34,7 @@ The framework supports the Page Object Model (POM) pattern and integrates with E
    
 5. **TestNG**
    - Integrated TestNG as the Test Runner for test execution. 
-   - *Path: src/test/java/com/QM/runners/
+   - Path: src/test/java/com/QM/runners/
 
 6. **Extent Reports**
    - Generated Cucumber Report and detailed Extent Reports.
