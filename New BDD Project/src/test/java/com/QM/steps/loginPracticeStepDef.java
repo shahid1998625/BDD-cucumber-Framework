@@ -56,7 +56,7 @@ public class loginPracticeStepDef extends BaseClass {
         String pword = sheet.getCellData(specific_Row, Key);
 
         String DecryptedPw = DataDecrypt.decrypt(pword);
-
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(rp1.getUserName())));
         enterusernameandpassword(uname, DecryptedPw);
         ExtentReportUtil.attachScreenshot(CaptureScreenshot.captureScreenshotAsBase64(driver));
     }

@@ -38,7 +38,7 @@ public class outlookPage {
     public WebElement getNoBtnpopup(){
         return noBtnpopup;
     }
-    @FindBy(xpath = "//input[@id='KmsiCheckboxField']")
+    @FindBy(id = "KmsiCheckboxField")
     WebElement backBtnpopup;
     public WebElement getBackBtnpopup(){
         return backBtnpopup;

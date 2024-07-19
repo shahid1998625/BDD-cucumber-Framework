@@ -84,6 +84,7 @@ BDD-Cucumber/
 │   │   │               └── ScreenshotListener.java
 │   │   │           ├── pages/
 │   │   │               └── GmailPage.java
+│   │   │               └── greyQMPage.java
 │   │   │               └── LoginPracticePage.java
 │   │   │               └── outlookPage.java
 │   │   │           ├── utils/
@@ -102,17 +103,27 @@ BDD-Cucumber/
 │   │   │               └── TestRunner.java
 │   │   │           ├── steps/
 │   │   │               └── gmailStepDef.java
+│   │   │               └── greyQMStepDef.java
 │   │   │               └── loginPracticeStepDef.java
 │   │   │               └── outlookStepDef.java
 │   │   └── resources/
 │   │       ├── features/
-│   │            └── gmail.feature
-│   │            └── loginPractice.feature
-│   │            └── outlook.feature
+│   │           └── gmail.feature
+│   │           └── greyhrQM.feature
+│   │           └── loginPractice.feature
+│   │           └── outlook.feature
 │   │       ├── Test Data/
 │   │           └── InputTestData.xlsx
-└── pom.xml
+├── pom.xml
+├── reports/
+│   ├── extent-reports/
+├── ReportsOTR/
+│   ├── output.docx/
+├── targetoutput/
+│   ├── cucumber-reports.html
 └── README.md
+
+
 
 
 ## Reports
