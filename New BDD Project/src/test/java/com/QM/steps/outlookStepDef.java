@@ -30,7 +30,7 @@ public class outlookStepDef extends BaseClass {
     public outlookStepDef() throws IOException {
         driver = BaseClass.getDriver();
         op = new outlookPage(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(7));
         Exsheet = new ExcelUtil("src/test/resources/Test Data/InputTestData.xlsx", "Sheet1");
     }
 
@@ -41,7 +41,7 @@ public class outlookStepDef extends BaseClass {
             ExtentReportUtil.getTest().info("Given user launches microsoft link");
             setUp();
             int Url = 0;
-            String URL =Exsheet.getCellData(specific_Row,Url);
+            String URL = Exsheet.getCellData(specific_Row,Url);
             try {
                 driver.get(URL);
                 ExtentReportUtil.logPass("Opened the Application URL");
@@ -89,6 +89,7 @@ public class outlookStepDef extends BaseClass {
         ExtentReportUtil.attachScreenshot(CaptureScreenshot.captureScreenshotAsBase64(driver));
         op.getSignInBtn().click();
         //  ScreenshotListener.screenshotlist.add(cp.TestScreenshot(driver));
+//        op.getBackBtnpopup().sendKeys(Keys.TAB);
         op.getBackBtnpopup().click();
         op.getNoBtnpopup().click();
         ScreenshotListener.screenshotlist.add(cp.TestScreenshot(driver));
@@ -106,6 +107,7 @@ public class outlookStepDef extends BaseClass {
     public void Now_click_on_outlook_will_be_navigated_to_outlook_mail_homepage(){
         ExtentReportUtil.getTest().info("Then Now click on outlook , will be navigated to outlook mail homepage");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(op.getOutlookBtn())));
         op.getOutlookBtn().click();
         ScreenshotListener.screenshotlist.add(cp.TestScreenshot(driver));
         ExtentReportUtil.attachScreenshot(CaptureScreenshot.captureScreenshotAsBase64(driver));
@@ -164,7 +166,6 @@ public class outlookStepDef extends BaseClass {
         String cc = Exsheet.getCellData(specific_Row,Cc);
         String subject = Exsheet.getCellData(specific_Row,Subject);
         String addMailText = Exsheet.getCellData(specific_Row,Addmail);
-
 
         sendanEmail(to,cc,subject);
         op.getAddSubjecttextBox().sendKeys(Keys.ENTER);

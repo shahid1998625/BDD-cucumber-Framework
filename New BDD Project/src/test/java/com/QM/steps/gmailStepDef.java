@@ -31,7 +31,7 @@ public class gmailStepDef extends BaseClass {
     public gmailStepDef() throws IOException  {
         driver = BaseClass.getDriver();
         gp = new GmailPage(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(7));
         Exsheet= new ExcelUtil("src/test/resources/Test Data/InputTestData.xlsx", "Sheet1");
 
     }
@@ -92,7 +92,7 @@ public class gmailStepDef extends BaseClass {
         String Actualurl = driver.getCurrentUrl();
         System.out.println(Actualurl);
         assertTrue(Actualurl.contains(ExpectedURL));
-        wait.until(ExpectedConditions.visibilityOf(gp.getToBtnincompose()));
+//        wait.until(ExpectedConditions.visibilityOf(gp.getToBtnincompose()));
 
         int To = 3;
         int Subject = 5;
@@ -102,7 +102,7 @@ public class gmailStepDef extends BaseClass {
         String subject = Exsheet.getCellData(specific_Row,Subject);
         String addMailText = Exsheet.getCellData(specific_Row,Addmail);
 
-
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(gp.getToBtnincompose())));
         gp.getToBtnincompose().sendKeys(to);
         ExtentReportUtil.logPass("writing new email draft");
         ExtentReportUtil.attachScreenshot(CaptureScreenshot.captureScreenshotAsBase64(driver));
@@ -146,6 +146,7 @@ public class gmailStepDef extends BaseClass {
         gp = new GmailPage(driver);
         ScreenshotListener.screenshotlist.add(cp.TestScreenshot(driver));
         ExtentReportUtil.logPass("Launched in to Google account link");
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(gp.getGotoGoogleAcc())));
         gp.getGotoGoogleAcc().click();
 
     }
