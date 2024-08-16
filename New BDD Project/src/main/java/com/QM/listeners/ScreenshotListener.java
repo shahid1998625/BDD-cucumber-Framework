@@ -15,7 +15,8 @@ public class ScreenshotListener implements IInvokedMethodListener, ITestListener
     public void onFinish(ITestContext context) {
 //        System.out.println("JKA: "+ScreenshotListener.screenshotlist);
         try {
-            ImageToWord.appendImagesToWord(ScreenshotListener.screenshotlist,"ReportsOTROP/Output.docx");
+            // ImageToWord.appendImagesToWord(ScreenshotListener.screenshotlist,"ReportsOTROP/Output.docx");
+            System.out.println("JKA: "+ScreenshotListener.screenshotlist);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
