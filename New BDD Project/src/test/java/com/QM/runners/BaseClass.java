@@ -6,20 +6,21 @@ import com.QM.drivers.DriverManager;
 
 public class BaseClass {
 
-    protected static WebDriver driver;
+//    protected static WebDriver driver;
 
-    @BeforeClass
-    public static void setUp() {
-        driver = DriverManager.getDriver();
-        driver.manage().window().maximize();
+    @BeforeMethod
+    public void setUp() {
+//        driver = DriverManager.getDriver();
+        DriverManager.initializeDriver();
+//        driver.manage().window().maximize();
     }
 
-    @AfterClass
+    @AfterMethod
     public static void tearDown() {
         DriverManager.quitDriver();
     }
 
     public static WebDriver getDriver() {
-        return driver;
+        return DriverManager.getDriver();
     }
 }
