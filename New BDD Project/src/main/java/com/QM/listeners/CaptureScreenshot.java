@@ -12,11 +12,10 @@ public class CaptureScreenshot {
         try {
             TakesScreenshot screenshot = (TakesScreenshot) driver;
             String srcFile = screenshot.getScreenshotAs(OutputType.BASE64);
-            File destFile = new File("D:\\OTR\\screenshot.jpeg" +System.currentTimeMillis() + ".jpeg");
+            File destFile = new File("D:\\OTR\\screenshot.jpeg" + System.currentTimeMillis() + ".jpeg");
             System.out.println("Screenshot taken and saved at: " + destFile.getAbsolutePath());
             return srcFile;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("An error occurred while taking screenshot: " + e.getMessage());
         }
         return null;
