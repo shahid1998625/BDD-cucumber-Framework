@@ -9,16 +9,18 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-
 public class ExtentReportUtil {
     private static ExtentReports extent;
     static ExtentSparkReporter sparkReporter;
-    private static ExtentTest test;
+    private static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
 
     public static void setup() {
         System.out.println("Setting up ExtentReports...");
         if (extent == null) {
-            sparkReporter = new ExtentSparkReporter("reports/extent-reports/extent-report" + System.currentTimeMillis() + ".html");
+//            sparkReporter = new ExtentSparkReporter("reports/ExtentReportsSha/extent-report" + System.currentTimeMillis() + ".html");
+//            sparkReporter = new ExtentSparkReporter("reports/new HTML Reports/new HTML Reports.html");
+//            sparkReporter = new ExtentSparkReporter("D:new HTML Reports/extent-report.html");
+            sparkReporter = new ExtentSparkReporter("D:/BDD-cucumber-Framework/New BDD Project/new HTML Reports/extent-report.html");
             sparkReporter.config().setTheme(Theme.STANDARD);
             extent = new ExtentReports();
             extent.attachReporter(sparkReporter);
@@ -28,29 +30,31 @@ public class ExtentReportUtil {
     public static void startTest(String testName) {
         System.out.println("Starting test: " + testName);
         if (extent != null) {
-            test = extent.createTest(testName);
+            ExtentTest extentTest = extent.createTest(testName);
+            test.set(extentTest);
         } else {
             throw new IllegalStateException("ExtentReports is not initialized. Call setup() first.");
         }
     }
 
     public static ExtentTest getTest() {
-        if (test == null) {
+        ExtentTest extentTest = test.get();
+        if (extentTest == null) {
             throw new IllegalStateException("ExtentTest is not initialized. Call startTest() first.");
         }
-        return test;
+        return extentTest;
     }
 
     public static void logPass(String message) {
-        test.pass(message);
+        getTest().pass(message);
     }
 
     public static void logFail(String message) {
-        test.fail(message);
+        getTest().fail(message);
     }
 
     public static void logInfo(String message) {
-        test.info(message);
+        getTest().info(message);
     }
 
     public static String captureScreenshotAsBase64(WebDriver driver) {
@@ -60,29 +64,28 @@ public class ExtentReportUtil {
 
     public static void logPassWithScreenshot(WebDriver driver, String message) {
         String base64Screenshot = captureScreenshotAsBase64(driver);
-        test.pass(message, com.aventstack.extentreports.MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
+        getTest().pass(message, com.aventstack.extentreports.MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
     }
 
     public static void logFailWithScreenshot(WebDriver driver, String message) {
         String base64Screenshot = captureScreenshotAsBase64(driver);
-        test.fail(message, com.aventstack.extentreports.MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
+        getTest().fail(message, com.aventstack.extentreports.MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
     }
 
     public static void attachScreenshot(String base64Screenshot) {
-        test.addScreenCaptureFromBase64String(base64Screenshot);
+        getTest().addScreenCaptureFromBase64String(base64Screenshot);
     }
 
     public static void tearDown(Scenario scenario) {
+        ExtentTest extentTest = getTest();
         if (scenario.isFailed()) {
-//            TakesScreenshot screenshot = (TakesScreenshot) driver;
-//            byte[] data = screenshot.getScreenshotAs(OutputType.BYTES);
-//            scenario.attach(data, "image/jpeg", "Failed Step Screenshot");
-//            String base64Screenshot = captureScreenshotAsBase64(driver);
-            //test.fail("Test Failed").addScreenCaptureFromBase64String(base64Screenshot);
+            extentTest.fail("Test Failed");
         } else {
-            test.pass("Test Passed");
+            extentTest.pass("Test Passed");
         }
+        extent.flush();
     }
+
 
     public static void flushReport() {
         System.out.println("Closing/flushing down ExtentReports...");

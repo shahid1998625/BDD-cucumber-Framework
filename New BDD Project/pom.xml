@@ -9,59 +9,94 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>22</maven.compiler.source>
-        <maven.compiler.target>22</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <build>
         <plugins>
             <plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>5.8.1</version>
-                <executions>
-                    <execution>
-                        <id>execution</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <projectName>cucumber-jvm-example</projectName>
-                            <!-- optional, per documentation set this to "true" to bypass generation of Cucumber Reports entirely, defaults to false if not specified -->
-                            <skip>false</skip>
-                            <!-- output directory for the generated report -->
-                            <outputDirectory>target/cucumber-reports/advanced-reports</outputDirectory>
-<!--                            <cucumberOutput> target/cucumber-reports/cucumber.json</cucumberOutput>-->
-<!--                            <buildnumber>1</buildnumber>-->
-<!--                            <parallelTesting>false</parallelTesting>-->
-                            <skip>false</skip>
-                            <!-- optional, defaults to outputDirectory if not specified -->
-                            <inputDirectory>${project.build.directory}/cucumber-reports</inputDirectory>
-                            <jsonFiles>
-                                <!-- supports wildcard or name pattern -->
-                                <param>**/*.json</param>
-                            </jsonFiles>
-                            <!-- optional, defaults to outputDirectory if not specified -->
-                            <classificationDirectory>${project.build.directory}/cucumber-reports</classificationDirectory>
-                            <checkBuildResult>false</checkBuildResult>
-                            <classificationFiles>
-                                <!-- supports wildcard or name pattern -->
-                                <param>sample.properties</param>
-                                <param>other.properties</param>
-                            </classificationFiles>
-                            <!-- optional, set true to group features by its Ids -->
-                            <mergeFeaturesById>false</mergeFeaturesById>
-                            <!-- optional, set true to get a final report with latest results of the same test from different test runs -->
-                            <mergeFeaturesWithRetest>false</mergeFeaturesWithRetest>
-                            <!-- optional, set true to fail build on test failures -->
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <!--                        <suiteXmlFile>path/to/your/testng.xml</suiteXmlFile>-->
+                        <suiteXmlFile>D:\BDD-cucumber-Framework\New BDD Project\testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <reportsDirectory>D:\BDD-cucumber-Framework\New BDD Project\target\surefire-reports\testng-results.xml</reportsDirectory>
+                    <systemPropertyVariables>
+                        <cucumber.options>D:\BDD-cucumber-Framework\New BDD Project\targetoutput\cucumber-reports\Cucumber.json</cucumber.options>
+                    </systemPropertyVariables>
+                    <!--                    <includes>-->
+                    <!--                        <include>com.QM.PracticeTestCasesHybridApp.PhotosApp_Practice</include>-->
+                    <!--                        <include>testng.xml</include>-->
+                    <!--&lt;!&ndash;                        <include>**/*Tests.java</include>&ndash;&gt;-->
+                    <!--&lt;!&ndash;                        <include>**/*TestCase.java</include>&ndash;&gt;-->
+                    <!--                    </includes>-->
+                    <!--                    <excludes>-->
+                    <!--&lt;!&ndash;                        <exclude>**/AbstractTest*.java</exclude>&ndash;&gt;-->
+                    <!--                    </excludes>-->
+                    <!--                    <forkCount>2</forkCount>-->
+                    <!--                    <reuseForks>true</reuseForks>-->
+                    <!--                    <parallel>methods</parallel>-->
+                    <!--                    <threadCount>4</threadCount>-->
+                </configuration>
             </plugin>
         </plugins>
     </build>
 
+
+
+    <!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>net.masterthought</groupId>-->
+<!--                <artifactId>maven-cucumber-reporting</artifactId>-->
+<!--                <version>5.8.1</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>execution</id>-->
+<!--                        <phase>verify</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <projectName>cucumber-jvm-example</projectName>-->
+<!--                            &lt;!&ndash; optional, per documentation set this to "true" to bypass generation of Cucumber Reports entirely, defaults to false if not specified &ndash;&gt;-->
+<!--                            <skip>false</skip>-->
+<!--                            &lt;!&ndash; output directory for the generated report &ndash;&gt;-->
+<!--                            <outputDirectory>target/cucumber-reports/advanced-reports</outputDirectory>-->
+<!--                            &lt;!&ndash;                            <cucumberOutput> target/cucumber-reports/cucumber.json</cucumberOutput>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <buildnumber>1</buildnumber>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <parallelTesting>false</parallelTesting>&ndash;&gt;-->
+<!--                            <skip>false</skip>-->
+<!--                            &lt;!&ndash; optional, defaults to outputDirectory if not specified &ndash;&gt;-->
+<!--                            <inputDirectory>${project.build.directory}/cucumber-reports</inputDirectory>-->
+<!--                            <jsonFiles>-->
+<!--                                &lt;!&ndash; supports wildcard or name pattern &ndash;&gt;-->
+<!--                                <param>**/*.json</param>-->
+<!--                            </jsonFiles>-->
+<!--                            &lt;!&ndash; optional, defaults to outputDirectory if not specified &ndash;&gt;-->
+<!--                            <classificationDirectory>${project.build.directory}/cucumber-reports-->
+<!--                            </classificationDirectory>-->
+<!--                            <checkBuildResult>false</checkBuildResult>-->
+<!--                            <classificationFiles>-->
+<!--                                &lt;!&ndash; supports wildcard or name pattern &ndash;&gt;-->
+<!--                                <param>sample.properties</param>-->
+<!--                                <param>other.properties</param>-->
+<!--                            </classificationFiles>-->
+<!--                            &lt;!&ndash; optional, set true to group features by its Ids &ndash;&gt;-->
+<!--                            <mergeFeaturesById>false</mergeFeaturesById>-->
+<!--                            &lt;!&ndash; optional, set true to get a final report with latest results of the same test from different test runs &ndash;&gt;-->
+<!--                            <mergeFeaturesWithRetest>false</mergeFeaturesWithRetest>-->
+<!--                            &lt;!&ndash; optional, set true to fail build on test failures &ndash;&gt;-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
 
     <dependencies>
@@ -131,11 +166,11 @@
             <version>1.15</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.relevantcodes/extentreports -->
-<!--        <dependency>-->
-<!--            <groupId>com.relevantcodes</groupId>-->
-<!--            <artifactId>extentreports</artifactId>-->
-<!--            <version>2.41.2</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.relevantcodes</groupId>-->
+        <!--            <artifactId>extentreports</artifactId>-->
+        <!--            <version>2.41.2</version>-->
+        <!--        </dependency>-->
         <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
         <dependency>
             <groupId>com.aventstack</groupId>
@@ -143,11 +178,11 @@
             <version>5.0.9</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports-cucumber4-adapter -->
-        <dependency>
-            <groupId>com.aventstack</groupId>
-            <artifactId>extentreports-cucumber4-adapter</artifactId>
-            <version>1.2.1</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.aventstack</groupId>-->
+<!--            <artifactId>extentreports-cucumber4-adapter</artifactId>-->
+<!--            <version>1.2.1</version>-->
+<!--        </dependency>-->
 
 
         <dependency>
@@ -162,6 +197,21 @@
             <artifactId>commons-io</artifactId>
             <version>2.11.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.28</version> <!-- Use the latest version available -->
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/net.masterthought/cucumber-reporting -->
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>5.8.2</version>
+        </dependency>
+
+
 
     </dependencies>
 
